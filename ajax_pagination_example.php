@@ -21,6 +21,19 @@ mysqli_close($db_conx);
 <!DOCTYPE html>
 <html>
 	<head>
+        <style>
+            .username{
+                color: cornflowerblue;
+                font-weight: bold;
+            }
+            body{
+                width: 700px;
+                position: relative;
+                margin: auto;
+            }
+        </style>
+        <link type="text/css" rel="stylesheet" href="css/bootstrap-theme.min.css">
+        <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
 	<script type="text/javascript">
 	function request_page(pn){
         var results_box = document.getElementById('results_box');
@@ -35,7 +48,7 @@ mysqli_close($db_conx);
                 var html_output = '';
                 for(var i = 0 ; i < dataArray.length -1 ; i ++){
                     var itemArray = dataArray[i].split('|');
-                    html_output += "ID :"+itemArray[0]+" - Testmonial from <b>"+itemArray[1]+"</b><hr/>";
+                    html_output += "ID :"+itemArray[0]+" - Testmonial from <b class='username'>"+itemArray[1]+" "+itemArray[2]+"</b><hr/>";
                 }
                 results_box.innerHTML = html_output;
             }
@@ -48,11 +61,11 @@ mysqli_close($db_conx);
 
         if(last != 1){
             if(pn > 1){
-                paginationCtrls += '<button onclick="request_page('+(pn-1)+')">&lt;</button>';
+                paginationCtrls += '<li><a onclick="request_page('+(pn-1)+')">&lt;</a></li>';
             }
-            paginationCtrls += '&nbsp; &nbsp; <b>Page '+pn+' of ' +last+ '</b>&nbsp; &nbsp;';
+            //paginationCtrls += '&nbsp; &nbsp; <b>Page '+pn+' of ' +last+ '</b>&nbsp; &nbsp;';
             if(pn != last){
-                paginationCtrls += '<button onclick="request_page('+(pn+1)+')">&gt;</button>';
+                paginationCtrls += '<li><a onclick="request_page('+(pn+1)+')">&gt;</a><li>';
             }
         }
         pagination_controls.innerHTML = paginationCtrls;
@@ -60,10 +73,11 @@ mysqli_close($db_conx);
 	</script>
 	</head>
 	<body>
-		<div id="pagination_controls">
+
+		<div id="results_box" style="margin:auto 100px">
 		</div>
-		<div id="results_box">
-		</div>
+        <div id="pagination_controls" class="pagination">
+        </div>
 		<script type="text/javascript">
             var rpp = <?=$rpp?>;
             var last = <?=$last?>;
