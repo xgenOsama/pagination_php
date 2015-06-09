@@ -74,7 +74,7 @@ mysqli_close($db_conx);
 	</head>
 	<body>
 
-		<div id="results_box" style="margin:auto 100px">
+		<div id="results_box" class="list-group" style="margin:auto 100px">
 		</div>
         <div id="pagination_controls" class="pagination">
         </div>
